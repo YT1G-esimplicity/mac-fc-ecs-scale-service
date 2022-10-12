@@ -1,37 +1,22 @@
-name: 'Deprovision GitHub Runners'
-description: 'Scale down ECS service count'
+name: "Scale an ECS service"
+description: "Scale an ECS service by setting the desired task count"
 inputs:
-  aws-access-key-id:
+  runner-hash:
     description: >-
-      AWS Access Key ID. This input is required if running in the GitHub hosted environment.
-      It is optional if running in a self-hosted environment that already has AWS credentials,
-      for example on an EC2 instance.
+      If you are using the self-hosted github runner module, the module will generate a hash for naming the service and cluster. You can set that unique hash here instead of setting the 'service' and 'cluster' variables.
     required: false
-  aws-secret-access-key:
-    description: >-
-      AWS Secret Access Key. This input is required if running in the GitHub hosted environment.
-      It is optional if running in a self-hosted environment that already has AWS credentials,
-      for example on an EC2 instance.
-    required: false
-  aws-region:
-    description: 'Your AWS region'
-    required: true
-    default: 'us-east-1'
-  repository-hash:
-    description: >-
-      If you are using the self-hosted github runner module, the module will generate a hash for naming the container-name,
-      task-definition, service, and cluster. You can populate that unique hash here to specify those and will not need to populate the next 4 variables below.
-    required: false
-    default: ''
-  service:
-    description: 'The name of the ECS service.'
-    required: false
-    default: ''
+    default: ""
   cluster:
-    description: 'The name of the ECS cluster the service belongs to.'
+    description: "The name of the ECS cluster the service belongs to."
     required: false
-    default: ''
+    default: ""
+  service:
+    description: "The name of the ECS service."
+    required: false
+    default: ""
+  desired-count:
+    description: "The number of ECS tasks you wish to deploy for the specified service."
+    required: true
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
-  post: 'dist/cleanup/index.js'
+  using: "node16"
+  main: "dist/index.js"

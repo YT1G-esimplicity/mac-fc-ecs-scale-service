@@ -1,12 +1,8 @@
 repos:
-  - repo: git://github.com/pre-commit/pre-commit-hooks
-    rev: v4.0.1
+  - repo: local
     hooks:
-      - id: check-merge-conflict
-      - id: detect-private-key
-      - id: trailing-whitespace
-
-  - repo: git://github.com/igorshubovych/markdownlint-cli
-    rev: v0.28.1
-    hooks:
-      - id: markdownlint
+      - id: compile-check
+        name: Check that the module was was compiled
+        entry: bash -c 'npm run compile && git diff --no-patch --exit-code'
+        language: system
+        verbose: true
