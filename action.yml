@@ -16,7 +16,10 @@ inputs:
     default: ""
   desired-count:
     description: "The number of ECS tasks you wish to deploy for the specified service."
-    required: true
+    required: false
+  adjust-count:
+    description: "The adjustment to the current desired task count (signed integer)."
+    required: false
 runs:
   using: "node16"
   main: "dist/index.js"
