@@ -1,5 +1,5 @@
 name: "Scale an ECS service"
-description: "Scale an ECS service by setting the desired task count"
+description: "Scale an ECS service by setting the desired task count or adjusting it by a given amount"
 inputs:
   runner-hash:
     description: >-
@@ -8,15 +8,16 @@ inputs:
     default: ""
   cluster:
     description: "The name of the ECS cluster the service belongs to."
-    required: false
-    default: ""
+    required: true
   service:
     description: "The name of the ECS service."
-    required: false
-    default: ""
+    required: true
   desired-count:
     description: "The number of ECS tasks you wish to deploy for the specified service."
-    required: true
+    required: false
+  adjust-count:
+    description: "The number by which you wish to adjust the desired task count. This can be a positive or negative integer."
+    required: false
 runs:
   using: "node16"
   main: "dist/index.js"
