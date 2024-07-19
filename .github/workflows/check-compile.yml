@@ -30,9 +30,12 @@ jobs:
 
       - name: Check for diff
         run: |
-          if ! $(git diff --no-patch --exit-code); then
+          if git diff --no-patch --exit-code; then
+            echo "No uncommitted changes after compiling."
+          else
             echo "Detected uncommitted changes after compiling. Please run 'npm run compile' and commit the changes."
             exit 1
+          fi
 
       - name: Validate adjust-count usage
         run: |
